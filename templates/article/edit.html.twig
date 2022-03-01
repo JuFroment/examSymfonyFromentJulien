@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Article{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-3">Mettre à jour l'article <em>{{ article.titre }}</em></h1>
+<div class="row">
+    <div class="text-center">
+    {{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    {{ include('article/_delete_form.html.twig') }}
+</div>
+</div>
+    <div class="text-end">
+        <a href="{{ path('app_article_index') }}" class="me-5 text-decoration-none text-black"><i class="fa-solid fa-left-long fa-2xl text-black"></i> <strong>RETOUR</strong></a>
+    </div>
+
+{% endblock %}

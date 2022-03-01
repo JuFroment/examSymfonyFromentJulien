@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+<div class="text-center my-3">
+    <h1>{{ article.titre }}</h1>
+</div>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="card mb-3" style="height: auto">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="{{ asset('uploads/' ~ article.image) }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body d-flex flex-column align-items-between">
+                        <h6 class="card-title text-center text-primary">{{ article.category.libelle|upper }}</h6>
+                        <h5 class="card-title text-center"><strong>{{ article.titre }}</strong></h5>
+                        <p class="card-text">{{ article.contenu }}</p>
+                        <div class="text-end">
+                            <p><em>écrit par {{ article.user.username }}</em></p>
+                        </div>
+                        <div class="col-4 offset-5">
+                            <a href="{{ path('app_commentaire_index') }}" class="btn btn-warning my-3">VOIR LES
+                                COMMENTAIRES <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+
+{#
+
+J'ai essayé d'afficher le nombre de commentaires sur le détail d'un article, en vain. Là avec le code ci dessous, il me dit que la variable commentaire n'existe pas. Si tu as la solution je suis preneur !
+
+                                {% if commentaire|length == 0 %}
+                                <div class="alert alert-warning" role="alert">
+                                    Désolé, cet article n'a pas encore de commentaire !
+                                </div>
+                                {% elseif commentaire|length == 1%}
+                                <div class="alert alert-primary" role="alert">
+                                    Cet article a actuellement commentaire.
+                                </div>
+                                {% else %}
+                                <div class="alert alert-primary" role="alert">
+                                    Cet article a actuellement {{  commentaire|length }} commentaires.
+                                </div>
+                                {% endif %}
+#}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center mb-3">
+                {% if app.user == article.user %}
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}"
+                       class="text-decoration-none text-black"><strong>ÉDITER</strong> <i
+                                class="fas fa-edit fa-xl  text-black "></i></a>
+                    {{ include('article/_delete_form.html.twig') }}
+                {% endif %}
+            </div>
+
+            <div class="text-end">
+                <a href="{{ path('app_article_index') }}" class="me-5 text-decoration-none text-black"><i
+                            class="fa-solid fa-left-long fa-2xl text-black"></i> <strong>RETOUR</strong></a>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

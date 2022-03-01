@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block body %}
+    <h1>Create new Article</h1>
+
+    {{ include('article/_form.html.twig') }}
+    <div class="text-end">
+        <a href="{{ path('app_article_index') }}" class="me-5 text-decoration-none text-black"><i class="fa-solid fa-left-long fa-2xl text-black"></i> <strong>RETOUR</strong></a>
+    </div>
+{% endblock %}
